@@ -1,0 +1,133 @@
+$IndigoStyle__theme:#1b6c92;
+$IndigoStyle__Deep:#023144;
+$IndigoStyle__light:#1488cc;
+$IndigoStyle__light2:#2d97d4;
+$IndigoStyle__light3:#5baad8;
+$IndigoStyle__point:#32c5ff;
+
+
+.IndigoStyle{
+    a{
+        color:$IndigoStyle__theme;
+    }
+    .login-sidebar{
+        .login-box{
+            .card-body{
+                background-color: #023144af;
+                background-image: none;
+            }
+        }
+    }
+    .rectangle-btn{
+        @include button-bg (transparent,$black,$IndigoStyle__theme,$white);
+    }
+    .btn-primary{
+        @include button-bg ($IndigoStyle__theme,$white,$IndigoStyle__Deep,$white);
+    }
+    .btn-info{
+        @include button-bg ($IndigoStyle__light, $white ,$IndigoStyle__point, $white);
+    }
+    .header{
+        background-image: none;
+        background-color:$IndigoStyle__theme;
+    }
+    .page_topmenu {
+        .top_menu{
+            background-color:$IndigoStyle__theme;
+            li{
+                border-right:1px solid $IndigoStyle__light3;
+                span{
+                   color:$IndigoStyle__point;
+                }
+                a{
+                    color:$white;
+                }
+            }
+        }
+    }
+    
+    .nav {
+        > li{
+            > a{
+                &:active,
+                &:focus,
+                &:hover{
+                    background-color:$IndigoStyle__theme;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        > li {
+            &.first{
+                &:hover{
+                    > a{
+                        color:$white;
+                        background-color:$IndigoStyle__light3!important;
+                        border-bottom: 2px solid $IndigoStyle__light;
+                    }
+                }
+            }
+            > a {
+                border-bottom: 2px solid $IndigoStyle__light!important;
+                &.collapse-item{
+                   color:$white;
+                   background-color:$IndigoStyle__light3;
+                }
+            }
+        } 
+    }
+    .nav_btn{
+        background-color:$IndigoStyle__light;
+    }
+    .nav-pills {
+      > li{
+          &.active{
+              >a{
+                  background-color:$IndigoStyle__point;
+                  color:$white;
+                  &:active,
+                  &:hover,
+                  &:focus{
+                      background-color:$IndigoStyle__point;
+                      color:$white;
+                  }
+              }
+          }
+      }
+    }
+    .collapse{
+        .card-body{
+            background-color:$IndigoStyle__Deep!important;
+            li{
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color:$IndigoStyle__light2!important;
+                }
+            }
+        }
+    }
+    .modal-content{
+        border-top:10px solid $IndigoStyle__theme;
+    }
+    .panel-default { 
+        > .panel-heading{
+            background-color:$IndigoStyle__theme;
+        }
+    }
+    table{
+        th{
+            background-color:$IndigoStyle__theme;
+        }
+    }
+    .list-group-item{
+        &.active{
+            background-color:$IndigoStyle__Deep;
+            &:hover,
+            &:focus{
+                background-color:$IndigoStyle__theme;
+            }
+        }
+    }
+}

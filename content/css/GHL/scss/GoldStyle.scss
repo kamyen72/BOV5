@@ -1,0 +1,136 @@
+$GoldStyle__theme:#777043;
+$GoldStyle__Deep:#222;
+$GoldStyle__light:#d8b169;
+$GoldStyle__light2:#d8b97f;
+$GoldStyle__light3:#e4c387;
+$GoldStyle__point:#fdf3b4;
+
+
+.GoldStyle{
+    a{
+        color:$GoldStyle__theme;
+    }
+    .login-sidebar{
+        .login-box{
+            .card-body{
+                background-color: #777043af;
+                background-image: none;
+            }
+        }
+    }
+    .rectangle-btn{
+        @include button-bg (transparent,$black,$GoldStyle__theme,$white);
+    }
+    .btn-primary{
+        @include button-bg ($GoldStyle__theme,$white,$GoldStyle__Deep,$white);
+    }
+    .btn-info{
+        @include button-bg ($GoldStyle__light, $white ,$GoldStyle__point, $white);
+    }
+    .header{
+        background-image: none;
+        background-color:$GoldStyle__theme;
+    }
+    .page_topmenu {
+        .top_menu{
+            background-color:$GoldStyle__theme;
+            li{
+                border-right:1px solid $GoldStyle__light3;
+                span{
+                   color:$GoldStyle__light3;
+                }
+                a{
+                    color:$white;
+                }
+            }
+        }
+    }
+    
+    .nav {
+        > li{
+            > a{
+                &:active,
+                &:focus,
+                &:hover{
+                    background-color:$GoldStyle__theme;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        > li {
+            &.first{
+                &:hover{
+                    > a{
+                        color:$black;
+                        background-color:$GoldStyle__light3!important;
+                        border-bottom: 2px solid $GoldStyle__light;
+                    }
+                }
+            }
+            > a {
+                border-bottom: 2px solid $GoldStyle__light!important;
+                &.collapse-item{
+                   color:$black;
+                   background-color:$GoldStyle__light3;
+                }
+            }
+        } 
+    }
+    .nav_btn{
+        background-color:$GoldStyle__light;
+    }
+    .nav-pills {
+      > li{
+          &.active{
+              >a{
+                  background-color:$GoldStyle__point;
+                  color:$black;
+                  &:active,
+                  &:hover,
+                  &:focus{
+                      background-color:$GoldStyle__point;
+                      color:$black;
+                  }
+              }
+          }
+      }
+    }
+    .collapse{
+        .card-body{
+            background-color:$GoldStyle__Deep!important;
+            li{
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color:$GoldStyle__light2!important;
+                    a{
+                        color:$black;
+                    }
+                }
+            }
+        }
+    }
+    .modal-content{
+        border-top:10px solid $GoldStyle__theme;
+    }
+    .panel-default { 
+        > .panel-heading{
+            background-color:$GoldStyle__theme;
+        }
+    }
+    table{
+        th{
+            background-color:$GoldStyle__theme;
+        }
+    }
+    .list-group-item{
+        &.active{
+            background-color:$GoldStyle__Deep;
+            &:hover,
+            &:focus{
+                background-color:$GoldStyle__theme;
+            }
+        }
+    }
+}

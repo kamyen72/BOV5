@@ -1,0 +1,133 @@
+$OrangeBlackStyle__theme:#2d2d2d;
+$OrangeBlackStyle__Deep:#222;
+$OrangeBlackStyle__light:#ff6700;
+$OrangeBlackStyle__light2:#f07929;
+$OrangeBlackStyle__light3:#f39f68;
+$OrangeBlackStyle__point:#ffc704;
+
+
+.OrangeBlackStyle{
+    a{
+        color:$OrangeBlackStyle__theme;
+    }
+    .login-sidebar{
+        .login-box{
+            .card-body{
+                background-color: #2d2d2daf;
+                background-image: none;
+            }
+        }
+    }
+    .rectangle-btn{
+        @include button-bg (transparent,$black,$OrangeBlackStyle__theme,$white);
+    }
+    .btn-primary{
+        @include button-bg ($OrangeBlackStyle__theme,$white,$OrangeBlackStyle__Deep,$white);
+    }
+    .btn-info{
+        @include button-bg ($OrangeBlackStyle__light, $white ,$OrangeBlackStyle__point, $black);
+    }
+    .header{
+        background-image: none;
+        background-color:$OrangeBlackStyle__theme;
+    }
+    .page_topmenu {
+        .top_menu{
+            background-color:$OrangeBlackStyle__theme;
+            li{
+                border-right:1px solid $OrangeBlackStyle__light3;
+                span{
+                   color:$OrangeBlackStyle__point;
+                }
+                a{
+                    color:$white;
+                }
+            }
+        }
+    }
+    
+    .nav {
+        > li{
+            > a{
+                &:active,
+                &:focus,
+                &:hover{
+                    background-color:$OrangeBlackStyle__theme;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        > li {
+            &.first{
+                &:hover{
+                    > a{
+                        color:$white;
+                        background-color:$OrangeBlackStyle__light3!important;
+                        border-bottom: 2px solid $OrangeBlackStyle__light;
+                    }
+                }
+            }
+            > a {
+                border-bottom: 2px solid $OrangeBlackStyle__light!important;
+                &.collapse-item{
+                   color:$white;
+                   background-color:$OrangeBlackStyle__light3;
+                }
+            }
+        } 
+    }
+    .nav_btn{
+        background-color:$OrangeBlackStyle__light;
+    }
+    .nav-pills {
+      > li{
+          &.active{
+              >a{
+                  background-color:$OrangeBlackStyle__point;
+                  color:$OrangeBlackStyle__theme;
+                  &:active,
+                  &:hover,
+                  &:focus{
+                      background-color:$OrangeBlackStyle__point;
+                      color:$OrangeBlackStyle__theme;
+                  }
+              }
+          }
+      }
+    }
+    .collapse{
+        .card-body{
+            background-color:$OrangeBlackStyle__Deep!important;
+            li{
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color:$OrangeBlackStyle__light2!important;
+                }
+            }
+        }
+    }
+    .modal-content{
+        border-top:10px solid $OrangeBlackStyle__theme;
+    }
+    .panel-default {
+        > .panel-heading{
+            background-color:$OrangeBlackStyle__theme;
+        }
+    }
+    table{
+        th{
+            background-color:$OrangeBlackStyle__theme;
+        }
+    }
+    .list-group-item{
+        &.active{
+            background-color:$OrangeBlackStyle__Deep;
+            &:hover,
+            &:focus{
+                background-color:$OrangeBlackStyle__theme;
+            }
+        }
+    }
+}

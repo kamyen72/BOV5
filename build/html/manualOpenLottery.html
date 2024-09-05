@@ -1,0 +1,387 @@
+<div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <ul class="nav nav-pills">
+                <!--<li ng-class="{'active':dataSource.pageStatus == 'manualView'}">
+                    <a href="javascript:void(0)" ng-click="changePageToManualView()">{{ 'ManualOpenLottery_ManualOpen' | translate }}</a>
+                </li>
+                <li ng-class="{'active':dataSource.pageStatus == 'resetView'}">
+                    <a href="javascript:void(0)" ng-click="changePageToResetView()">{{ 'ManualOpenLottery_ResetOpen' | translate }}</a>
+                </li>-->
+                <li ng-class="{'active':dataSource.pageStatus == 'officialPeriodView'}">
+                    <a href="javascript:void(0)" ng-click="dataSource.pageStatus = 'officialPeriodView'">{{ 'ManualOpenLottery_OfficialPeriod' | translate }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-if="dataSource.pageStatus == 'manualView'">
+        <div class="panel-body">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <label class="control-label" for="Customer:">{{ 'ManualOpenLottery_LotteryTypeID' | translate }}:</label>
+                <select class="form-control" ng-model="dataSource.openData.LotteryTypeData"
+                        ng-options="option as option.LotteryTypeName for option in dataSource.selLotterys"></select>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <label class=" control-label" for="Customer:">{{ 'ManualOpenLottery_CurrentPeriod' | translate }}:</label>
+                <select class="form-control" ng-disabled="!dataSource.openData.LotteryTypeData" ng-model="dataSource.openData.oLottery"
+                        ng-options="option as option.CurrentPeriod for option in dataSource.openData.LotteryTypeData.OLotteries"></select>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <label class="control-label" for="Customer:">Prize_1:</label>
+                <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                       ng-model="dataSource.openData.InputResult1">
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12" ng-if="dataSource.openData.oLottery.LotteryTypeID && dataSource.openData.oLottery.LotteryTypeID != 16 && dataSource.openData.oLottery.LotteryTypeID != 17 
+            && dataSource.openData.oLottery.LotteryTypeID != 18 && dataSource.openData.oLottery.LotteryTypeID != 19 && dataSource.openData.oLottery.LotteryTypeID != 27 && !dataSource.openData.oLottery.IsAgentGame"">
+                <label class="control-label" for="Customer:">Prize_2:</label>
+                <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                       ng-model="dataSource.openData.InputResult2">
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12" ng-if="dataSource.openData.oLottery.LotteryTypeID && dataSource.openData.oLottery.LotteryTypeID != 16 && dataSource.openData.oLottery.LotteryTypeID != 17 
+            && dataSource.openData.oLottery.LotteryTypeID != 18 && dataSource.openData.oLottery.LotteryTypeID != 19 && dataSource.openData.oLottery.LotteryTypeID != 27 && !dataSource.openData.oLottery.IsAgentGame"">
+                <label class="control-label" for="Customer:">Prize_3:</label>
+                <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                       ng-model="dataSource.openData.InputResult3">
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                <div class="btn_area">
+                    <ul class="text-left">
+                        <li>
+                            <input type="button" class="btn btn-primary btn-block" value="{{ 'ManualOpenLottery_Open' | translate }}" ng-click="checkPwd(open,'open')" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-if="dataSource.pageStatus == 'resetView'">
+        <div class="panel-body">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <label class="control-label">{{ 'ManualOpenLottery_LotteryTypeID' | translate }}:</label>
+                <select class="form-control" ng-model="dataSource.resetData.LotteryTypeData"
+                        ng-options="option as option.LotteryTypeName for option in dataSource.openedLotterys"></select>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <label class=" control-label">{{ 'ManualOpenLottery_CurrentPeriod' | translate }}:</label>
+                <select class="form-control" ng-disabled="!dataSource.resetData.LotteryTypeData" ng-model="dataSource.resetData.oLottery"
+                        ng-options="option as option.CurrentPeriod for option in dataSource.resetData.LotteryTypeData.OLotteries"></select>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <label class="control-label">{{ 'ManualOpenLottery_OldResult' | translate }}:</label>
+                <input type="text" placeholder="" class="form-control input-md"
+                       ng-model="dataSource.resetData.oLottery.Result" disabled>
+            </div>
+            <!--<div class="col-md-12 col-sm-12 col-xs-12">
+                <label class="control-label">{{ 'ManualOpenLottery_NewResult' | translate }}:</label>
+                <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                        ng-disabled="!dataSource.resetData.oLottery" ng-model="dataSource.resetData.NewResult">
+                <span>1st Prize only, example: xxxx</span>
+            </div>-->
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <label class="control-label" for="Customer:">Prize_1:</label>
+                <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                       ng-model="dataSource.resetData.NewResult1">
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12" ng-if="dataSource.resetData.oLottery.LotteryTypeID && dataSource.resetData.oLottery.LotteryTypeID != 16
+                     && dataSource.resetData.oLottery.LotteryTypeID != 17 && dataSource.openData.oLottery.LotteryTypeID != 18 && dataSource.openData.oLottery.LotteryTypeID != 19 && dataSource.resetData.oLottery.LotteryTypeID != 27
+                     && !dataSource.resetData.oLottery.IsAgentGame">
+                <label class="control-label" for="Customer:">Prize_2:</label>
+                <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                       ng-model="dataSource.resetData.NewResult2">
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12" ng-if="dataSource.resetData.oLottery.LotteryTypeID && dataSource.resetData.oLottery.LotteryTypeID != 16
+                     && dataSource.resetData.oLottery.LotteryTypeID != 17 && dataSource.openData.oLottery.LotteryTypeID != 18 && dataSource.openData.oLottery.LotteryTypeID != 19 && dataSource.resetData.oLottery.LotteryTypeID != 27
+                     && !dataSource.resetData.oLottery.IsAgentGame">
+                <label class="control-label" for="Customer:">Prize_3:</label>
+                <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                       ng-model="dataSource.resetData.NewResult3">
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                <div class="btn_area">
+                    <ul class="text-left">
+                        <li>
+                            <input type="button" class="btn btn-primary btn-block" value="{{ 'Reset' | translate }}" ng-click="checkPwd(reset,'reset')" />
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="dataSource.pageStatus == 'officialPeriodView'">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'SearchCondition' | translate }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 mb-10">
+                    <label class="control-label">{{ 'ManualOpenLottery_LotteryTypeID' | translate }}:</label>
+                    <select class="form-control" ng-model="dataSource.searchCondition.LotteryTypeID"
+                            ng-options="option.LotteryTypeID as option.LotteryTypeName for option in dataSource.selLotterys"></select>
+                </div>
+                <!-- <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 mb-10">
+                    <label class=" control-label">{{ 'DateS' | translate }}:</label>
+                    <input type="date" placeholder="" class="form-control input-md" ng-model="dataSource.searchCondition.DateS">
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 mb-10">
+                    <label class=" control-label">{{ 'DateE' | translate }}:</label>
+                    <input type="date" placeholder="" class="form-control input-md" ng-model="dataSource.searchCondition.DateE">
+                </div> -->
+
+                <div class="col-lg-3 col-sm-12 col-xs-12 p-0">
+                    <div class="btn_area">
+                        <ul class="text-left">
+                            <!--<li><input type="button" class="btn btn-primary btn-block" value="{{ 'Add' | translate }}" ng-click="checkPwd(showOfficialPeriod)" /></li>-->
+                            <li><input type="button" class="btn btn-primary btn-block" value="{{ 'Search' | translate }}" ng-click="searchManualOLottery()" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="css_table">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>{{ 'ID' | translate }}</th>
+                            <th>{{ 'ManualOpenLottery_LotteryTypeName' | translate }}</th>
+                            <th>{{ 'ManualOpenLottery_CurrentPeriod' | translate }}</th>
+                            <th>{{ 'ManualOpenLottery_DrawLotteryTime' | translate }}</th>
+                            <th>{{ 'ManualOpenLottery_CloseTime' | translate }}</th>
+                            <th>{{ 'WinLostReport_Result' | translate }}</th>
+                            <!--<th></th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="olottery in dataSource.manualOLotterys">
+                            <td>{{olottery.ID}}</td>
+                            <td>{{olottery.LotteryTypeName}}</td>
+                            <td>{{olottery.CurrentPeriod}}</td>
+                            <td>{{olottery.DrawLotteryTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                            <td>{{olottery.CloseTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                            <td ng-if="olottery.CanSetResult">
+                                <button ng-click="openDialog(olottery)">Open</button>
+                                <!--<input type="button" class="btn btn-primary btn-block" value="{{ 'ManualOpenLottery_Open' | translate }}" ng-click="checkPwd(open,'open')" />-->
+                            </td>
+                            <td ng-if="!olottery.CanSetResult">
+                                <span ng-if="olottery.LotteryTypeID == 16 || olottery.LotteryTypeID == 17 || olottery.LotteryTypeID == 18 || olottery.LotteryTypeID == 19
+                                || olottery.LotteryTypeID == 27 || olottery.IsAgentGame">{{olottery.Result}}</span>
+                                <span ng-if="olottery.LotteryTypeID != 16 && olottery.LotteryTypeID != 17 && olottery.LotteryTypeID  != 18 && olottery.LotteryTypeID  != 19
+                                && olottery.LotteryTypeID != 27 && !olottery.IsAgentGame">
+                                    <span ng-if="olottery.Result">Prize_1:{{olottery.ResultList[2]}}</span>
+                                    <span ng-if="olottery.Result">Prize_2:{{olottery.ResultList[1]}}</span>
+                                    <span ng-if="olottery.Result">Prize_3:{{olottery.ResultList[0]}}</span>
+                                </span>
+                            </td>
+                            <!--<td>
+                                <input type="button" class="btn btn-success" value="{{ 'Edit' | translate }}" ng-click="checkPwd(showOfficialPeriod,olottery)">
+                                <input type="button" class="btn btn-danger" value="{{ 'Del' | translate }}" ng-click="checkPwd(deleteOfficialPeriod,olottery)">
+                            </td>-->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--<div style="margin:0px auto;">
+                <pagination options="dataSource.PagerObj" page-changed="PageChanged(dataSource.PagerObj.CurrentPage)">
+                </pagination>
+            </div>-->
+        </div>
+    </div>
+
+    <!--Official Period視窗-->
+    <button id="ShowOffificalPeriod" class="btn btn-primary btn-block " data-toggle="modal" data-target="#OffificalPeriod"
+            style="display:none"></button>
+    <div class="modal fade" id="OffificalPeriod" tabindex="-1" role="dialog" aria-labelledby="OffificalPeriodTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ManualOpenLottery_OfficialPeriod | translate }}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="form" class="form-horizontal" role="form">
+                        <div class="col-md-12">
+                            <label class="control-label">{{ 'ManualOpenLottery_LotteryTypeName' | translate }}:</label>
+                            <select name="LotteryType" class="form-control"
+                                    ng-model="dataSource.officialPeriod.LotteryTypeID">
+                                <option ng-repeat="lotteryType in dataSource.selLotteryTypeList" ng-value="lotteryType.LotteryTypeID">
+                                    {{lotteryType.LotteryTypeName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label">{{ 'ManualOpenLottery_CurrentPeriod' | translate }}:</label>
+                            <input name="CurrentPeriod" type="text" placeholder="" class="form-control input-md"
+                                   ng-model="dataSource.officialPeriod.CurrentPeriod" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label">{{ 'ManualOpenLottery_DrawLotteryTime' | translate }}:</label>
+                            <!--<input name="CurrentLotteryTime" type="datetime" placeholder="" class="form-control input-md"
+                                   ng-model="dataSource.officialPeriod.CurrentLotteryTime" required>-->
+                            <input name="CurrentLotteryTime" type="date" placeholder="" class="form-control input-md"
+                                   ng-model="dataSource.officialPeriod.CurrentLotteryTime" required>
+                            <input name="CurrentLotteryTime" type="time" placeholder="" class="form-control input-md"
+                                   ng-model="dataSource.officialPeriod.CurrentLotteryTime" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label">{{ 'ManualOpenLottery_CloseTime' | translate }}:</label>
+                            <input name="CloseTime" type="date" placeholder="" class="form-control input-md"
+                                   ng-model="dataSource.officialPeriod.CloseTime" required>
+                            <input name="CloseTime" type="time" placeholder="" class="form-control input-md"
+                                   ng-model="dataSource.officialPeriod.CloseTime" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn rectangle-btn" data-dismiss="modal" ng-click="modalMsgConfirmEvent(false)">Cancel</button>-->
+                    <button type="button" class="btn rectangle-btn" data-dismiss="modal"
+                            ng-click="confirmOfficialPeriod(form,dataSource.officialPeriod)">
+                        {{ 'Confirm' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--密碼驗證彈窗-->
+    <button id="ShowPasswordDialog" class="btn btn-primary btn-block" data-toggle="modal"
+            data-target="#PasswordDialog" style="display:none"></button>
+    <div class="modal fade" id="PasswordDialog" tabindex="-1" role="dialog" aria-labelledby="PasswordDialogTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{dataSource.modalMsg.title | translate}}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="EditPasswordForm" class="form-horizontal" role="form">
+                        <div class="col-xs-12">
+                            <label class="control-label">{{ 'Password' | translate }}:</label>
+
+                            <input name="EditPassword" class="form-control" type="password" ng-model="dataSource.EditPassword.Pwd" required />
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn rectangle-btn" data-dismiss="modal"
+                            ng-click="updateEditPassword(EditPasswordForm)">
+                        {{ 'Confirm' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--開獎視窗-->
+    <button id="ShowOpenLottery" class="btn btn-primary btn-block " data-toggle="modal" data-target="#OpenLottery"
+            style="display:none"></button>
+    <div class="modal fade" id="OpenLottery" tabindex="-1" role="dialog" aria-labelledby="OpenLotteryTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ManualOpenLottery_ManualOpen | translate }}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="form" class="form-horizontal" role="form">
+                        <div class="col-md-12">
+                            <label class="control-label">{{ 'ManualOpenLottery_LotteryTypeName' | translate }}:</label>
+                            {{dataSource.openData.oLottery.LotteryTypeName}}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label">{{ 'ManualOpenLottery_CurrentPeriod' | translate }}:</label>
+                            {{dataSource.openData.oLottery.CurrentPeriod}}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label">{{ 'ManualOpenLottery_DrawLotteryTime' | translate }}:</label>
+                            {{dataSource.openData.oLottery.DrawLotteryTime | date:'yyyy-MM-dd HH:mm:ss'}}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label">{{ 'ManualOpenLottery_CloseTime' | translate }}:</label>
+                            {{dataSource.openData.oLottery.CloseTime | date:'yyyy-MM-dd HH:mm:ss'}}
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <label class="control-label" for="Customer:">Prize_1:</label>
+                            <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                                   ng-model="dataSource.openData.InputResult1">
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 col-xs-12" ng-if="dataSource.openData.oLottery.LotteryTypeID && dataSource.openData.oLottery.LotteryTypeID != 16 && dataSource.openData.oLottery.LotteryTypeID != 17 
+                        && dataSource.openData.oLottery.LotteryTypeID != 18 && dataSource.openData.oLottery.LotteryTypeID != 19 && dataSource.openData.oLottery.LotteryTypeID != 27 && !dataSource.openData.oLottery.IsAgentGame">
+                            <label class="control-label" for="Customer:">Prize_2:</label>
+                            <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                                   ng-model="dataSource.openData.InputResult2">
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 col-xs-12" ng-if="dataSource.openData.oLottery.LotteryTypeID && dataSource.openData.oLottery.LotteryTypeID != 16 && dataSource.openData.oLottery.LotteryTypeID != 17 
+                        && dataSource.openData.oLottery.LotteryTypeID != 18 && dataSource.openData.oLottery.LotteryTypeID != 19 && dataSource.openData.oLottery.LotteryTypeID != 27 && !dataSource.openData.oLottery.IsAgentGame">
+                            <label class="control-label" for="Customer:">Prize_3:</label>
+                            <input type="text" placeholder="" class="form-control input-md" maxlength="4"
+                                   ng-model="dataSource.openData.InputResult3">
+                        </div>
+                    </form>
+                </div>
+                <div class="officialRTP row" style="padding:10px">
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            <span>UserWinPercentage</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" maxlength="4" style="height: 20px;" placeholder="0.90"
+                                ng-model="dataSource.openData.oLottery.UserWinPercentage">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn rectangle-btn" value="Generate" ng-click="get4DRtpResult(dataSource.openData.oLottery)"
+                            ng-disabled="dataSource.isLoading">
+                            Generate
+                        </button> 
+                        <label>click for next 20 random selection</label>
+                    </div>
+                    <div class="col-lg-6" ng-repeat="result in dataSource.fourDRtpResult">
+                        <div class="col-md-6">
+                            Result {{$index+1}} : <span>{{result.Result.padStart(4,'0')}}</span>
+                        </div>
+                        <div class="col-sm-6">
+                            WinMoney : <span>{{result.WinMoney}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn rectangle-btn" data-dismiss="modal" ng-click="modalMsgConfirmEvent(false)">Cancel</button>-->
+                    <button type="button" class="btn rectangle-btn" data-dismiss="modal"
+                            ng-click="checkPwd(open,'open')">
+                        {{ 'ManualOpenLottery_Open' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

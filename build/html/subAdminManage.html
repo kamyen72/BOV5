@@ -1,0 +1,192 @@
+<div>
+  <div ng-if="dataSource.pageStatus == 'searchView'">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ 'SearchCondition' | translate }}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="btn_area">
+            <ul class="text-right">
+              <li><input type="button" class="btn btn-primary btn-block" value="{{ 'Add' | translate }}" ng-click="showAdd()" /></li>
+              <li><input type="button" class="btn btn-primary btn-block" value="{{ 'Search' | translate }}" ng-click="search()" /></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="css_table">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>{{ 'SubAdminManage_Account' | translate }}</th>
+              <th>{{ 'SubAdminManage_FullName' | translate }}</th>
+              <th>{{ 'SubAdminManage_IsEnable' | translate }}</th>
+              <th>{{ 'SubAdminManage_CreateDate' | translate }}</th>
+              <th>{{ 'SubAdminManage_IsLock' | translate }}</th>
+              <th>{{ 'SubAdminManage_IP' | translate }}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="member in dataSource.listData">
+              <td>{{member.UserName | userName}}</td>
+              <td>{{member.FullName}}</td>
+              <td><input class="form-control" type="checkbox" ng-model="member.IsEnable" ng-change="changeAndSave(member)" /></td>
+              <td>{{member.CreateDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+              <td><input class="form-control" type="checkbox" ng-model="member.IsLock" ng-disabled="!member.IsLock" ng-change="changeAndSave(member)" /></td>
+              <td>{{member.LoginIP}}</td>
+              <td>
+                <input type="button" class="btn btn-success" value="{{ 'Edit' | translate }}" ng-click="showEdit(member)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin:0px auto;">
+        <pagination options="dataSource.PagerObj" page-changed="PageChanged(dataSource.PagerObj.CurrentPage)">
+        </pagination>
+      </div>
+    </div>
+  </div>
+  <div class="" ng-if="dataSource.pageStatus == 'addView' || dataSource.pageStatus == 'editView'">
+    <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12 personal-info">
+      <div class="row">
+      <h3>{{ 'SubAdminManage_SubAdminEdit' | translate }}</h3>
+      <hr>
+      <form name="form" class="form-horizontal " role="form">
+          <div class="list_area">
+            <h4>{{ 'SubAdminManage_SubAdminInformation' | translate }}</h4>
+            <hr>
+          <div class="col-xs-6">
+              <label>{{ 'SubAdminManage_Account' | translate }}:</label>
+              <span ng-class="{'text-red': ((form.UserName.$touched || dataSource.clickRegister) && form.UserName.$invalid)}">  *{{ 'SubAdminManage_UserName_Detail' | translate }}</span>
+              <input name="UserName" class="form-control" type="text" langkey="SubAdminManage_Account"
+                      ng-class="{'red-box': ((form.UserName.$touched || dataSource.clickRegister) && form.UserName.$invalid) || dataSource.ConfirmMsg.UserName}"
+                      ng-model="dataSource.selMemberInfo.Account"
+                      ng-blur="checkRegisterData('UserName')"
+                      ng-disabled="dataSource.pageStatus == 'editView'" required my-validator="userName"/>
+              <div class="text-red" ng-class="{'mt--10':dataSource.ConfirmMsg.UserName }" >{{dataSource.ConfirmMsg.UserName | translate }}</div>
+          </div>
+
+          <div class="col-xs-6">
+              <label>{{ 'SubAdminManage_FullName' | translate }}:</label>
+              <input name="FullName" class="form-control" type="text" langkey="SubAdminManage_FullName"
+                      ng-class="{'red-box': ((form.FullName.$touched || dataSource.clickRegister) && form.FullName.$invalid) || dataSource.ConfirmMsg.FullName}"
+                      ng-model="dataSource.selMemberInfo.FullName"
+                      required />
+          </div>
+          
+          <div class="col-xs-6">
+              <label>{{ 'Password' | translate }}:</label>
+              <span ng-class="{'text-red': ((form.Pwd.$touched || dataSource.clickRegister) && form.Pwd.$invalid)}">  *{{ 'Verify_Password' | translate }}</span>
+              <input name="Pwd" class="form-control" langkey="Password" autocomplete="new-password"
+                type="{{ dataSource.isShowMemberPwd ? 'text' : 'password'}}"
+                ng-class="{'red-box': ((form.Pwd.$touched || dataSource.clickRegister) && form.Pwd.$invalid) || dataSource.ConfirmMsg.Pwd}"
+                ng-model="dataSource.selMemberInfo.Pwd" my-validator="password" ng-required="dataSource.pageStatus == 'addView'"/>
+              <div class="input-group-prepend" style="margin-top: -45px;">
+                  <div class="input-group-text" ng-click="showEyeEvent(member)">
+                      <i ng-class="dataSource.isShowMemberPwd ? 'fa fa-eye':'fa fa-eye-slash'" aria-hidden="true" alt="眼睛標誌" ></i>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xs-6">
+              <label>{{ 'ConfirmPassword' | translate }}:</label>
+              <input name="ConfirmPwd" class="form-control" langkey="ConfirmPassword" autocomplete="new-password"
+                type="{{ dataSource.isShowMemberPwd ? 'text' : 'password'}}"
+                ng-class="{'red-box': ((form.ConfirmPwd.$touched || dataSource.clickRegister) && form.ConfirmPwd.$invalid) || dataSource.ConfirmMsg.ConfirmPwd}"
+                ng-model="dataSource.selMemberInfo.ConfirmPwd" my-validator="password" ng-required="dataSource.pageStatus == 'addView'"/>
+              <div class="input-group-prepend" style="margin-top: -45px;">
+                  <div class="input-group-text" ng-click="showEyeEvent(member)">
+                      <i ng-class="dataSource.isShowMemberPwd ? 'fa fa-eye':'fa fa-eye-slash'" aria-hidden="true" alt="眼睛標誌" ></i>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="list_area">
+          <h4>{{ 'ModulesView' | translate }}</h4>
+          <hr />
+          <div class="css_table">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th width="20%">{{ 'ViewGroup' | translate }}</th>
+                    <th>{{ 'ViewSub' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="view in dataSource.functionGroupList">
+                    <td>
+                      <div  style="display: flex;">
+                        <input class="form-control" type="checkbox" ng-model="view.IsCanEdit" ng-change="changeViewGroupCheckbox(view)"/>
+                        <label>{{view.LKey  | translate}}</label>
+                      </div>
+                    </td>
+                    <td>
+                      <div style="display: flex;" ng-repeat="sub in view.subView">
+                        <div style="display: flex; width: 75px;">
+                          <input id="{{sub.LKey}}-view" class="form-control" type="checkbox" ng-model="sub.IsCanView" ng-if="sub.ViewID >= 0"
+                          ng-change="changeSubViewCheckBox(sub)"/>
+                          <label for="{{sub.LKey}}-view" ng-if="sub.ViewID >= 0">
+                            {{ 'Read' | translate }}
+                          </label>
+                        </div>
+                        <div style="display: flex; width: 75px;">
+                          <input id="{{sub.LKey}}-edit" class="form-control" type="checkbox" ng-model="sub.IsCanEdit" ng-if="sub.EditID >= 0"
+                          ng-change="changeSubEditCheckBox(sub)"/>
+                          <label for="{{sub.LKey}}-edit" ng-if="sub.EditID >= 0">
+                            {{ 'Edit' | translate }}
+                          </label>
+                        </div>
+                        <label class="ml-5">{{sub.LKey  | translate}}</label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+          
+          <div class="col-xs-12" ng-if="dataSource.pageStatus == 'editView'">
+            <div class="btn_area">
+              <ul>
+                <li><input type="button" class="btn btn-primary" value="{{ 'SaveChanges' | translate }}" ng-click="update(form, true)"></li>
+                <li> <input type="button" class="btn btn-primary" value="{{ 'Cancel' | translate }}" ng-click="showSearch()"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-12" ng-if="dataSource.pageStatus == 'addView'">
+            <div class="btn_area">
+              <ul>
+                <li><input type="button" class="btn btn-primary" value="{{ 'Add' | translate }}" ng-click="add(form)"></li>
+                <li><input type="button" class="btn btn-primary" value="{{ 'Cancel' | translate }}" ng-click="showSearch()"></li>
+              </ul>
+            </div>
+          </div>
+      </form>
+      <!-- <form class="form-horizontal">
+          <h4>{{ 'SubAdminManage_EditPermission' | translate }}</h4>
+          <hr />
+          <div class="list_area">
+              <div class="col-md-12 p-0 mt-20 row">
+                  <div class="col-md-8" ng-if="dataSource.pageStatus == 'editView'">
+                      <input type="button" class="btn btn-primary" value="{{ 'SaveChanges' | translate }}" ng-click="update()">
+                      <input type="button" class="btn btn-primary" value="{{ 'Cancel' | translate }}" ng-click="showSearch()">
+                  </div>
+                  <div class="col-md-8" ng-if="dataSource.pageStatus == 'addView'">
+                      <input type="button" class="btn btn-primary" value="{{ 'Add' | translate }}" ng-click="add()">
+                      <input type="button" class="btn btn-primary" value="{{ 'Cancel' | translate }}" ng-click="showSearch()">
+                  </div>
+              </div>
+          </div>
+      </form> -->
+    </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+$AzureBlueStyle__theme:#081551;
+$AzureBlueStyle__Deep:#222;
+$AzureBlueStyle__light:#0149cc;
+$AzureBlueStyle__light2:#1b59cc;
+$AzureBlueStyle__light3:#3f6cbe;
+$AzureBlueStyle__point:#ffc704;
+
+
+.AzureBlueStyle{
+    a{
+        color:$AzureBlueStyle__theme;
+    }
+    .login-sidebar{
+        .login-box{
+            .card-body{
+                background-color: #2d2d2daf;
+                background-image: none;
+            }
+        }
+    }
+    .rectangle-btn{
+        @include button-bg (transparent,$black,$AzureBlueStyle__theme,$white);
+    }
+    .btn-primary{
+        @include button-bg ($AzureBlueStyle__theme,$white,$AzureBlueStyle__Deep,$white);
+    }
+    .btn-info{
+        @include button-bg ($AzureBlueStyle__light, $white ,$AzureBlueStyle__point, $black);
+    }
+    .header{
+        background-image: none;
+        background-color:$AzureBlueStyle__theme;
+    }
+    .page_topmenu {
+        .top_menu{
+            background-color:$AzureBlueStyle__theme;
+            li{
+                border-right:1px solid $AzureBlueStyle__light3;
+                span{
+                   color:$AzureBlueStyle__point;
+                }
+                a{
+                    color:$white;
+                }
+            }
+        }
+    }
+    
+    .nav {
+        > li{
+            > a{
+                &:active,
+                &:focus,
+                &:hover{
+                    background-color:$AzureBlueStyle__theme;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        > li {
+            &.first{
+                &:hover{
+                    > a{
+                        color:$white;
+                        background-color:$AzureBlueStyle__light3!important;
+                        border-bottom: 2px solid $AzureBlueStyle__light;
+                    }
+                }
+            }
+            > a {
+                border-bottom: 2px solid $AzureBlueStyle__light!important;
+                &.collapse-item{
+                   color:$white;
+                   background-color:$AzureBlueStyle__light3;
+                }
+            }
+        } 
+    }
+    .nav_btn{
+        background-color:$AzureBlueStyle__light;
+    }
+    .nav-pills {
+      > li{
+          &.active{
+              >a{
+                  background-color:$AzureBlueStyle__point;
+                  color:$AzureBlueStyle__theme;
+                  &:active,
+                  &:hover,
+                  &:focus{
+                      background-color:$AzureBlueStyle__point;
+                      color:$AzureBlueStyle__theme;
+                  }
+              }
+          }
+      }
+    }
+    .collapse{
+        .card-body{
+            background-color:$AzureBlueStyle__Deep!important;
+            li{
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color:$AzureBlueStyle__light2!important;
+                }
+            }
+        }
+    }
+    .modal-content{
+        border-top:10px solid $AzureBlueStyle__theme;
+    }
+    .panel-default {
+        > .panel-heading{
+            background-color:$AzureBlueStyle__theme;
+        }
+    }
+    table{
+        th{
+            background-color:$AzureBlueStyle__theme;
+        }
+    }
+    .list-group-item{
+        &.active{
+            background-color:$AzureBlueStyle__Deep;
+            &:hover,
+            &:focus{
+                background-color:$AzureBlueStyle__theme;
+            }
+        }
+    }
+}

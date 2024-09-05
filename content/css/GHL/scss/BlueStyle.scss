@@ -1,0 +1,133 @@
+$BlueStyle__theme:#26384d;
+$BlueStyle__Deep:#0e0e0e;
+$BlueStyle__light:#5e84e2;
+$BlueStyle__light2:#799cf1;
+$BlueStyle__light3:#a2bcfb;
+$BlueStyle__point:#ccbc98;
+
+
+.BlueStyle{
+    a{
+        color:$BlueStyle__theme;
+    }
+    .login-sidebar{
+        .login-box{
+            .card-body{
+                background-color: #26384daf;
+                background-image: none;
+            }
+        }
+    }
+    .rectangle-btn{
+        @include button-bg (transparent,$black,$BlueStyle__theme,$white);
+    }
+    .btn-primary{
+        @include button-bg ($BlueStyle__theme,$white,$BlueStyle__Deep,$white);
+    }
+    .btn-info{
+        @include button-bg ($BlueStyle__light, $white ,$BlueStyle__point, $black);
+    }
+    .header{
+        background-image: none;
+        background-color:$BlueStyle__theme;
+    }
+    .page_topmenu {
+        .top_menu{
+            background-color:$BlueStyle__theme;
+            li{
+                border-right:1px solid $BlueStyle__light3;
+                span{
+                   color:$BlueStyle__point;
+                }
+                a{
+                    color:$white;
+                }
+            }
+        }
+    }
+    
+    .nav {
+        > li{
+            > a{
+                &:active,
+                &:focus,
+                &:hover{
+                    background-color:$BlueStyle__theme;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        > li {
+            &.first{
+                &:hover{
+                    > a{
+                        color:$white;
+                        background-color:$BlueStyle__light3!important;
+                        border-bottom: 2px solid $BlueStyle__light;
+                    }
+                }
+            }
+            > a {
+                border-bottom: 2px solid $BlueStyle__light!important;
+                &.collapse-item{
+                   color:$white;
+                   background-color:$BlueStyle__light3;
+                }
+            }
+        } 
+    }
+    .nav_btn{
+        background-color:$BlueStyle__light;
+    }
+    .nav-pills {
+      > li{
+          &.active{
+              >a{
+                  background-color:$BlueStyle__point;
+                  color:$BlueStyle__theme;
+                  &:active,
+                  &:hover,
+                  &:focus{
+                      background-color:$BlueStyle__point;
+                      color:$BlueStyle__theme;
+                  }
+              }
+          }
+      }
+    }
+    .collapse{
+        .card-body{
+            background-color:$BlueStyle__Deep!important;
+            li{
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color:$BlueStyle__light2!important;
+                }
+            }
+        }
+    }
+    .modal-content{
+        border-top:10px solid $BlueStyle__theme;
+    }
+    .panel-default {
+        > .panel-heading{
+            background-color:$BlueStyle__theme;
+        }
+    }
+    table{
+        th{
+            background-color:$BlueStyle__theme;
+        }
+    }
+    .list-group-item{
+        &.active{
+            background-color:$BlueStyle__Deep;
+            &:hover,
+            &:focus{
+                background-color:$BlueStyle__theme;
+            }
+        }
+    }
+}

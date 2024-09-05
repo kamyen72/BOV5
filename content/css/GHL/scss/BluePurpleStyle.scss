@@ -1,0 +1,136 @@
+$BluePurpleStyle__theme:#2a2e71;
+$BluePurpleStyle__Deep:#2f3374;
+$BluePurpleStyle__light:#7e2271;
+$BluePurpleStyle__light2:#963689;
+$BluePurpleStyle__light3:#a05496;
+$BluePurpleStyle__point:#fd25b7;
+
+
+.BluePurpleStyle{
+    a{
+        color:$BluePurpleStyle__theme;
+    }
+    .login-sidebar{
+        .login-box{
+            .card-body{
+                background-color: #2a2e71af;
+                background-image: none;
+            }
+        }
+    }
+    .rectangle-btn{
+        @include button-bg (transparent,$black,$BluePurpleStyle__theme,$white);
+    }
+    .btn-primary{
+        @include button-bg ($BluePurpleStyle__theme,$white,$BluePurpleStyle__Deep,$white);
+    }
+    .btn-info{
+        @include button-bg ($BluePurpleStyle__light, $white ,$BluePurpleStyle__point, $black);
+    }
+    .header{
+        background-image: none;
+        background-color:$BluePurpleStyle__theme;
+    }
+    .page_topmenu {
+        .top_menu{
+            background-color:$BluePurpleStyle__theme;
+            li{
+                border-right:1px solid $BluePurpleStyle__light3;
+                span{
+                   color:$BluePurpleStyle__light3;
+                }
+                a{
+                    color:$white;
+                }
+            }
+        }
+    }
+    
+    .nav {
+        > li{
+            > a{
+                &:active,
+                &:focus,
+                &:hover{
+                    background-color:$BluePurpleStyle__theme;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        > li {
+            &.first{
+                &:hover{
+                    > a{
+                        color:$white;
+                        background-color:$BluePurpleStyle__light3!important;
+                        border-bottom: 2px solid $BluePurpleStyle__light;
+                    }
+                }
+            }
+            > a {
+                border-bottom: 2px solid $BluePurpleStyle__light!important;
+                &.collapse-item{
+                   color:$white;
+                   background-color:$BluePurpleStyle__light3;
+                }
+            }
+        } 
+    }
+    .nav_btn{
+        background-color:$BluePurpleStyle__light;
+    }
+    .nav-pills {
+      > li{
+          &.active{
+              >a{
+                  background-color:$BluePurpleStyle__point;
+                  color:$white;
+                  &:active,
+                  &:hover,
+                  &:focus{
+                      background-color:$BluePurpleStyle__point;
+                      color:$white;
+                  }
+              }
+          }
+      }
+    }
+    .collapse{
+        .card-body{
+            background-color:$BluePurpleStyle__Deep!important;
+            li{
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color:$BluePurpleStyle__light2!important;
+                    a{
+                        color:$white;
+                    }
+                }
+            }
+        }
+    }
+    .modal-content{
+        border-top:10px solid $BluePurpleStyle__theme;
+    }
+    .panel-default { 
+        > .panel-heading{
+            background-color:$BluePurpleStyle__theme;
+        }
+    }
+    table{
+        th{
+            background-color:$BluePurpleStyle__theme;
+        }
+    }
+    .list-group-item{
+        &.active{
+            background-color:$BluePurpleStyle__Deep;
+            &:hover,
+            &:focus{
+                background-color:$BluePurpleStyle__theme;
+            }
+        }
+    }
+}

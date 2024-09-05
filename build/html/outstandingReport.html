@@ -1,0 +1,476 @@
+<div>
+    <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+        <div class="panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'SearchCondition' | translate }}</h3>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+            <div class="panel panel-body">
+                <div class="col-md-4 col-sm-12 col-xs-12 p-0">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <label class="control-label">{{ 'Draw' | translate }}:</label>
+                        <select name="LotteryType" class="form-control"
+                                ng-model="dataSource.searchCondition.LotteryTypeID" ng-change="search()">
+                            <option ng-repeat="lotteryType in dataSource.selLotteryTypeList" ng-value="lotteryType.LotteryTypeID">
+                                {{lotteryType.LotteryTypeName}}
+                            </option>
+                        </select>
+                    </div>
+                    <!--<div class="col-md-6 col-sm-12 col-xs-12">
+                        <label class="control-label">{{ 'Date' | translate }}:</label>
+                        <input class="form-control" type="date" ng-model="dataSource.searchCondition.DateS" disabled />
+                    </div>-->
+                </div>
+                <br />
+                <div class="col-md-8 col-sm-12 col-xs-12 p-0">
+                    <div class="btn_area">
+                        <ul class="text-left">
+                            <li><input type="button" class="btn btn-primary btn-block" value="{{ 'Search' | translate }}" ng-click="search()" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <ul class="nav nav-pills">
+        <li ng-class="{'active':dataSource.pageStatus == '4D'}">
+            <a href="javascript:void(0)" ng-click="changeReport('4D')">{{ '4D' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == '3D'}">
+            <a href="javascript:void(0)" ng-click="changeReport('3D')">{{ '3D' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == '2D'}">
+            <a href="javascript:void(0)" ng-click="changeReport('2D')">{{ '2D' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == 'Depan2D'}">
+            <a href="javascript:void(0)" ng-click="changeReport('Depan2D')">{{ 'Depan2D' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == 'Tengah2D'}">
+            <a href="javascript:void(0)" ng-click="changeReport('Tengah2D')">{{ 'Tengah2D' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == 'ColokBebas'}">
+            <a href="javascript:void(0)" ng-click="changeReport('ColokBebas')">{{ 'ColokBebas' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == 'ColokBebas2D'}">
+            <a href="javascript:void(0)" ng-click="changeReport('ColokBebas2D')">{{ 'ColokBebas2D' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == 'ColokNaga'}">
+            <a href="javascript:void(0)" ng-click="changeReport('ColokNaga')">{{ 'ColokNaga' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == 'ColokJitu'}">
+            <a href="javascript:void(0)" ng-click="changeReport('ColokJitu')">{{ 'ColokJitu' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == 'Kombinasi'}">
+            <a href="javascript:void(0)" ng-click="changeReport('Kombinasi')">{{ 'Kombinasi' | translate }}</a>
+        </li>
+        <li ng-class="{'active':dataSource.pageStatus == 'Others'}">
+            <a href="javascript:void(0)" ng-click="changeReport('Others')">{{ 'Others' | translate }}</a>
+        </li>
+    </ul>
+
+    <div>
+        <button class="btn btn-success" ng-click="copy()">Copy</button>
+        <button class="btn btn-success" ng-click="excel()">Excel</button>
+        <button class="btn btn-success" ng-click="print()">Print</button>
+    </div>
+    <br />
+
+    <!--10筆1列-->
+    <div class="css_table" ng-if="dataSource.pageStatus == '4D' || dataSource.pageStatus == '3D' || dataSource.pageStatus == '2D'
+          || dataSource.pageStatus == 'Depan2D' || dataSource.pageStatus == 'Tengah2D'">
+        <div id="4D" class="table-responsive">
+
+            <table id="table_4D" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'No' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-if="dataSource.showListData.length === 0">
+                        <td colspan="11">{{ 'NoData' | translate }}</td>
+                    </tr>
+                    <tr ng-repeat="report in dataSource.showListData">
+                        <td>{{report.idx}}</td>
+                        <td ng-repeat="info in report.list" ng-click="showDetail(info)">
+                            {{info.key}} / <span ng-class="{'text-green':info.value > 0}">{{info.value}} / {{info.positionTaking}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin:0px auto;">
+            <pagination options="dataSource.PagerObj" page-changed="PageChanged(dataSource.PagerObj.CurrentPage)"></pagination>
+        </div>
+    </div>
+
+    <!--5筆1列-->
+    <div class="css_table" ng-if="dataSource.pageStatus == 'ColokBebas2D' || dataSource.pageStatus == 'ColokNaga'">
+        <div id="ColokBebas2D" class="table-responsive">
+
+            <table id="table_ColokBebas2D" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'No' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-if="dataSource.showListData.length === 0">
+                        <td colspan="6">{{ 'NoData' | translate }}</td>
+                    </tr>
+                    <tr ng-repeat="report in dataSource.showListData">
+                        <td>{{report.idx}}</td>
+                        <td ng-repeat="info in report.list" ng-click="showDetail(info)">
+                            {{info.key}} / <span ng-class="{'text-green':info.value > 0}">{{info.value}} / {{info.positionTaking}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin:0px auto;">
+            <pagination options="dataSource.PagerObj" page-changed="PageChanged(dataSource.PagerObj.CurrentPage)"></pagination>
+        </div>
+    </div>
+
+    <div class="css_table" ng-if="dataSource.pageStatus == 'ColokBebas'">
+        <div id="ColokBebas" class="table-responsive">
+            <table id="table_ColokBebas" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center"></th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                        <th class="text-center">NUMBER</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td ng-repeat="report in dataSource.listData_colokBebas">{{report.text}}</td>
+                    </tr>
+                    <tr>
+                        <td ng-repeat="report in dataSource.listData_colokBebas" ng-click="showDetail(report)" ng-class="{'text-green':report.value > 0}">
+                            {{report.value}} / {{report.positionTaking}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="css_table" ng-if="dataSource.pageStatus == 'ColokJitu'">
+        <div id="ColokJitu" class="table-responsive">
+            <table id="table_ColokJitu" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'URUTAN' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                        <th class="text-center">{{ 'Number / Value / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="report in dataSource.listData_colokJitu">
+                        <td>{{report.text}}</td>
+                        <td ng-repeat="item in report.list" ng-click="showDetail(item)" ng-class="{'text-green':item.value > 0}">
+                            {{item.text}} / {{item.value}} / {{item.positionTaking}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="Kombinasi" class="css_table" ng-if="dataSource.pageStatus == 'Kombinasi'">
+        <div class="table-responsive">
+            <div>1st&2nd</div>
+            <table id="table_Kombinasi_1&2" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center" ng-repeat="column in dataSource.listData_kombinasi_1st2nd">{{ '4DLotto_Indonesia_' + column.type  | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="column in dataSource.listData_kombinasi_1st2nd">
+                        <td ng-repeat="data in column.rows" ng-class="{'text-green':data.value > 0}" ng-if="$index == 0">
+                            {{ '4DLotto_Indonesia_' + data.value | translate }}
+                        </td>
+                        <td ng-repeat="data in column.rows" ng-click="showDetail(data)" ng-class="{'text-green':data.value > 0}" ng-if="$index > 0">
+                            {{data.value}} / {{data.positionTaking}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <div>3rd&4th</div>
+            <table id="table_Kombinasi_3&4" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center" ng-repeat="column in dataSource.listData_kombinasi_3rd4th">{{ '4DLotto_Indonesia_' + column.type | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="column in dataSource.listData_kombinasi_3rd4th">
+                        <td ng-repeat="data in column.rows" ng-class="{'text-green':data.value > 0}" ng-if="$index == 0">{{ '4DLotto_Indonesia_' + data.value | translate }}</td>
+                        <td ng-repeat="data in column.rows" ng-click="showDetail(data)" ng-class="{'text-green':data.value > 0}" ng-if="$index > 0">
+                            {{ data.value }} / {{data.positionTaking}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <div>combination</div>
+            <table id="table_Kombinasi_combination" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center" ng-repeat="column in dataSource.listData_kombinasi_combination">{{ '4DLotto_Indonesia_' + column.type | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="column in dataSource.listData_kombinasi_combination">
+                        <td ng-repeat="data in column.rows" ng-class="{'text-green':data.value > 0}" ng-if="$index == 0">{{ '4DLotto_Indonesia_' + data.value | translate }}</td>
+                        <td ng-repeat="data in column.rows" ng-click="showDetail(data)" ng-class="{'text-green':data.value > 0}" ng-if="$index > 0">
+                            {{data.value}} / {{data.positionTaking}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="Others" class="css_table" ng-if="dataSource.pageStatus == 'Others'">
+        <div class="table-responsive">
+            <div>TENGAH</div>
+            <table id="tengah" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'PIVK' | translate }}</th>
+                        <th class="text-center">{{ 'VALUE / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="info in dataSource.listData_tengah">
+                    <tr ng-repeat="data in info.listData">
+                        <td>{{'4DLotto_Indonesia_' + data.text | translate}}</td>
+                        <td ng-class="{'text-green':data.rvalue > 0}" ng-click="showDetail(data)">{{data.rvalue}} / {{data.positionTaking}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <div>DASAR</div>
+            <table id="dasar" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'PIVK' | translate }}</th>
+                        <th class="text-center">{{ 'VALUE / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="info in dataSource.listData_dasar">
+                    <tr ng-repeat="data in info.listData">
+                        <td>{{'4DLotto_Indonesia_' + data.text | translate}}</td>
+                        <td ng-class="{'text-green':data.rvalue > 0}" ng-click="showDetail(data)">{{data.rvalue}} / {{data.positionTaking}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <div>50-50</div>
+            <table id="fifty_fifty" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'PIVK' | translate }}</th>
+                        <th class="text-center">{{ 'VALUE / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="info in dataSource.listData_5050">
+                    <tr ng-repeat="data in info.listData">
+                        <!-- <td>{{'FamliyID' + info.LotteryTypeID + info.FamliyMiddelID + info.FamliySmallID | translate}}-{{'4DLotto_Indonesia_' + data.text | translate}}</td> -->
+                        <td>{{'FamliyID' + info.LotteryClassID + info.FamliySmallID.toString().padStart(3,'0') | translate}}-{{'4DLotto_Indonesia_' + data.text | translate}}</td>
+                        <td ng-class="{'text-green':data.rvalue > 0}" ng-click="showDetail(data)">{{data.rvalue}} / {{data.positionTaking}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--<div class="table-responsive">
+            <div>50-50 2D</div>
+            <table id="fifty_fifty2D" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'PIVK' | translate }}</th>
+                        <th class="text-center">{{ 'VALUE' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="info in dataSource.listData_50502D">
+                    <tr ng-repeat="data in info.listData">
+                        <td>{{info.LotteryInfoName}}-{{'4DLotto_Indonesia_' + data.text | translate}}</td>
+                        <td ng-class="{'text-green':data.rvalue > 0}">{{data.rvalue}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>-->
+        <div class="table-responsive">
+            <div>SHIO</div>
+            <table id="shio" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'PIVK' | translate }}</th>
+                        <th class="text-center">{{ 'VALUE / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="info in dataSource.listData_shio">
+                    <tr ng-repeat="data in info.listData">
+                        <td>{{'4DLotto_Indonesia_Shio_' + data.text | translate}}</td>
+                        <td ng-class="{'text-green':data.rvalue > 0}" ng-click="showDetail(data)">{{data.rvalue}} / {{data.positionTaking}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <div>SILANG</div>
+            <table id="silang" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'PIVK' | translate }}</th>
+                        <th class="text-center">{{ 'VALUE / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="info in dataSource.listData_silang">
+                    <tr ng-repeat="data in info.listData">
+                        <td>{{'FamliyID' + info.LotteryClassID + info.FamliySmallID.toString().padStart(3,'0') | translate}}-{{ data.text}}</td>
+                        <td ng-class="{'text-green':data.rvalue > 0}" ng-click="showDetail(data)">{{data.rvalue}} / {{data.positionTaking}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <div>KEMBANG</div>
+            <table id="kembang" class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'PIVK' | translate }}</th>
+                        <th class="text-center">{{ 'VALUE / P.T' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="info in dataSource.listData_kembang">
+                    <tr ng-repeat="data in info.listData">
+                        <td>{{'FamliyID' + info.LotteryClassID + info.FamliySmallID.toString().padStart(3,'0') | translate}}-{{data.text}}</td>
+                        <td ng-class="{'text-green':data.rvalue > 0}" ng-click="showDetail(data)">{{data.rvalue}} / {{data.positionTaking}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--<div class="table-responsive">
+            <div>KOMBINASI</div>
+            <table class="table table-striped table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">{{ 'PIVK' | translate }}</th>
+                        <th class="text-center">{{ 'VALUE' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="info in dataSource.listData_kombinasi">
+                    <tr ng-repeat="data in info.listData">
+                        <td>{{info.LotteryInfoName}}-{{data.text}}</td>
+                        <td>{{data.rvalue}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>-->
+    </div>
+</div>
+
+
+
+<!--顯示報表明細視窗-->
+<button id="ShowDetailDialog" class="btn btn-primary btn-block" data-toggle="modal" data-target="#DetailDialog"
+        style="display:none"></button>
+<div class="modal fade" id="DetailDialog" tabindex="-1" role="dialog" aria-labelledby="DetailDialogTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    {{ 'WinLostReportByGame_ReportDetail' | translate }}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 nopadding bet_text text-yellow">
+                    <span>{{ 'BetHistory_TypeName' | translate }}:</span>
+                    {{dataSource.selInfo.keyValue}}
+                </div>
+                <div class="col-md-12 nopadding bet_text text-yellow">
+                    <span>{{ 'CurrentPeriod' | translate }}:</span>
+                    {{dataSource.mPlayerObj[0].CurrentPeriod}}
+                </div>
+                <br />
+                <div class="clearfix"></div>
+
+                <div class="row-form">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'MemberID' | translate }}</th>
+                                    <th>{{ 'WinLostReportByGame_TOver' | translate }}</th>
+                                    <th>{{ 'DownLine' | translate }}</th>
+                                    <th>{{ 'DownLine PT' | translate }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="mplayer in dataSource.mPlayerObj">
+                                    <td>{{mplayer.Member.UserName | userName}}</td>
+                                    <td>{{mplayer.BetAmounts | currency : "" : 2}}</td>
+                                    <td>{{mplayer.DownLineName}}</td>
+                                    <td>{{mplayer.DownLinePositionTaking}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn rectangle-btn" data-dismiss="modal" ng-click="modalMsgConfirmEvent(false)">Cancel</button>-->
+                <button type="button" class="btn rectangle-btn" data-dismiss="modal">
+                    {{ 'Confirm' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

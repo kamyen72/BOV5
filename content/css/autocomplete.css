@@ -1,0 +1,54 @@
+﻿/* AUTOCOMPLETE */
+
+.autocomplete {
+	width: 100%;
+	position: relative;
+}
+
+    /* b00303037 */
+	/*.autocomplete input {
+		font-size: 1.2em;
+		width: 100%;
+		padding: 0.4em;
+	}*/
+
+	.autocomplete ul {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		/*border-left: 1px solid #888;
+		border-right: 1px solid #888;
+		border-bottom: 1px solid #888;*/
+		z-index: 1;
+        /* b00303037 */
+        padding-left: 0;
+        border-width: 0 1px 1px 1px;
+        border-style: solid;
+        border-color: #5cb3fd;
+        border-radius: 4px;
+	}
+
+	.autocomplete li {
+        height: 38px;
+        padding: 8px 12px;
+		text-align: left;
+		list-style: none;
+		width: 100%;
+		/*padding: 0.4em;*/
+		background-color: #fff;
+        border-radius: 4px;
+	}
+
+		.autocomplete li.active {
+			width: 100%;
+			background-color: #4bf;
+		}
+
+	.autocomplete .highlight {
+		background-color: #E2E2E2;
+	}
+
+	.autocomplete li.active .highlight {
+		background: #666;
+		color: #fff;
+	}

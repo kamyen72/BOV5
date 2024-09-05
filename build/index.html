@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html data-ng-app="BackDeskView">
+
+<head>
+    <!--IE版本自動以最新的啟動-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title></title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="copyright" CONTENT="本網頁著作權金河馬公司所有">
+    <!--[if lt IE 9]>
+          <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      
+    <!--套用的css-->
+    <!--BUILD_CSS_START-->
+    <link href="./css/all-lib.min.css?V=20210707.1" rel="stylesheet" />
+    <link href="./css/main.min.css?V=20210707.1" rel="stylesheet" />
+    <!--BUILD_CSS_END-->
+    <!--LOCAL_CSS_START-- >
+    <link href="./content/css/all-lib.min.css" rel="stylesheet" />
+    <link href="./content/css/GHL/main.min.css" rel="stylesheet" />
+    < !--LOCAL_CSS_END-->
+      
+    <!--引用的JS檔-->
+    <!--BUILD_LIB_JS_START-->
+    <script type="text/javascript" src="./js/all-lib.min.js"></script>
+    <!--BUILD_LIB_JS_END-->
+    <!--LOCAL_LIB_JS_START-- >
+    <script type="text/javascript" src="./scripts/all-lib.min.js"></script>
+    < !--LOCAL_LIB_JS_END-->
+
+    <script>
+        var BrowserDetect = {
+            init: function () {
+                "use strict";
+                this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+                this.version = this.searchVersion(navigator.appVersion) || this.searchVersion(navigator.userAgent) || "an unknown version";
+                this.OS = this.searchString(this.dataOS) || "an unknown OS";
+                this.UserAgent = navigator.userAgent;
+            },
+            searchString: function (data) {
+                "use strict";
+                for (var i = 0; i < data.length; i++) {
+                    if (!data[i].string) continue;
+
+                    var dataString = data[i].string.toUpperCase();
+                    var dataProp = data[i].prop;
+                    this.versionSearchString = data[i].versionSearch || data[i].identity;
+                    if (dataString) {
+                        if (dataString.indexOf(data[i].subString.toUpperCase()) > -1) {
+                            return data[i].identity;
+                        }
+                    }
+                    else if (dataProp) {
+                        return data[i].identity;
+                    }
+                }
+            },
+            searchVersion: function (dataString) {
+                "use strict";
+                var index = dataString.indexOf(this.versionSearchString);
+                if (index === -1) {
+                    return;
+                }
+                return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
+            },
+            dataBrowser: [
+                {
+                    string: navigator.userAgent,
+                    subString: "Chrome",
+                    identity: "Chrome"
+                },
+                {
+                    string: navigator.userAgent,
+                    subString: "OmniWeb",
+                    versionSearch: "OmniWeb/",
+                    identity: "OmniWeb"
+                },
+                {
+                    string: navigator.vendor,
+                    subString: "Apple",
+                    identity: "Safari",
+                    versionSearch: "Version"
+                },
+                {
+                    prop: window.opera,
+                    identity: "Opera",
+                    versionSearch: "Version"
+                },
+                {
+                    string: navigator.vendor,
+                    subString: "iCab",
+                    identity: "iCab"
+                },
+                {
+                    string: navigator.vendor,
+                    subString: "KDE",
+                    identity: "Konqueror"
+                },
+                {
+                    string: navigator.userAgent,
+                    subString: "Firefox",
+                    identity: "Firefox"
+                },
+                {
+                    string: navigator.vendor,
+                    subString: "Camino",
+                    identity: "Camino"
+                },
+                { // for newer Netscapes (6+)
+                    string: navigator.userAgent,
+                    subString: "Netscape",
+                    identity: "Netscape"
+                },
+                {
+                    string: navigator.userAgent,
+                    subString: "MSIE",
+                    identity: "Explorer",
+                    versionSearch: "MSIE"
+                },
+                {
+                    string: navigator.userAgent,
+                    subString: "Gecko",
+                    identity: "Mozilla",
+                    versionSearch: "rv"
+                },
+                { // for older Netscapes (4-)
+                    string: navigator.userAgent,
+                    subString: "Mozilla",
+                    identity: "Netscape",
+                    versionSearch: "Mozilla"
+                }],
+            dataOS: [
+                {
+                    string: navigator.userAgent,
+                    subString: "iPhone",
+                    identity: "iPhone/iPod"
+                },
+                {
+                    string: navigator.userAgent,
+                    subString: "Android",
+                    identity: "Android"
+                },
+                {
+                    string: navigator.platform,
+                    subString: "Win",
+                    identity: "Windows"
+                },
+                {
+                    string: navigator.platform,
+                    subString: "Mac",
+                    identity: "Mac"
+                },
+                {
+                    string: navigator.platform,
+                    subString: "Linux",
+                    identity: "Linux"
+                }]
+        };
+
+        $(function () {
+            if (typeof BrowserDetect.browser === "undefined") {
+                BrowserDetect.init();
+            }
+
+            if (BrowserDetect.OS != "Windows" && BrowserDetect.OS != "Mac") {
+                //if (window.DeviceOrientationEvent) {
+                //    window.addEventListener('deviceorientation', function (event) {
+                //        if (window.matchMedia("(orientation: portrait)").matches) {
+                //            $('#myBody').hide();
+                //            $('#chageBody').show();
+                //        }
+                //        else {
+                //            $('#myBody').show();
+                //            $('#chageBody').hide();
+                //        }
+                //    }, false);
+                //}
+                //else {
+                //    $('#myBody').show();
+                //    $('#chageBody').hide();
+                //}
+            }
+            else {
+                //$('#myBody').show();
+                //$('#chageBody').hide();
+            }
+        });
+    </script>
+    </script>
+    <script type="text/javascript">
+        // Moni製作 選單用
+        $(document).ready(function () {
+            $(".nav_btn").click(function () {
+                $("header").toggleClass("side_nav");
+                $(".main_area").toggleClass("main_width");
+                $(this).toggleClass("open");
+                //   $(".main_area).toggleClass("main_width");
+            });
+        });
+    </script>
+</head>
+
+<body class="smoothscroll" ng-cloak>
+    <!--已登入後才能顯示的功能選單-->
+    <div id="myBody" data-ng-controller="indexController" disabel>
+        <!-- <p>This is a paragraph.</p> -->
+        <button ng-show="dataSource.topBarShow" ng-class="dataSource.topBarShow ? 'nav_btn':'nav_btn open'"></button>
+        <div id="wrapper">
+            <div ng-show="dataSource.topBarShow">
+                <!-- header -->
+                <!-- Top Bar -->
+                <header class="header">
+                    <!-- Top Nav -->
+                    <nav class="nav-main">
+                        <ul class="nav nav-tabs">
+                            <!-- demo 第一個 -->
+                            <li class="first" role="presentation" ng-repeat="firstMenu in dataSource.menuList">
+                                <a name="{{firstMenu.Text}}"
+                                   href="{{firstMenu.URL}}"
+                                   ng-click="siteMapPath(firstMenu,-1)"
+                                   ng-if="!firstMenu.DropDownList">
+                                    <span>{{firstMenu.Text}}</span>
+                                </a>
+                                <a name="{{firstMenu.Text}}"
+                                   class="collapse-item collapsed " data-toggle="collapse" data-target="#collapseExample_{{$index}}" role="button"
+                                   aria-expanded="false" aria-controls="collapseExample_{{$index}}" ng-click="siteMapPath(firstMenu,-1)"
+                                   ng-if="firstMenu.DropDownList && firstMenu.Items.length > 0">
+                                    {{firstMenu.Text}} <span>{{firstMenu.SubText}}</span>
+                                </a>
+                                <div class="collapse" id="collapseExample_{{$index}}">
+                                    <div class="card card-body">
+                                        <ul>
+                                            <li ng-repeat="secondMenu in firstMenu.Items" ng-if="secondMenu.DropDownList && secondMenu.Items.length > 0">
+                                                <a name="{{secondMenu.Text}}"
+                                                   class="collapse-item collapsed" data-toggle="collapse" data-target="#collapseExample1_{{$index}}" role="button"
+                                                   aria-expanded="false" aria-controls="collapseExample1_{{$index}}" href="{{secondMenu.URL}}"
+                                                   ng-click="siteMapPath(firstMenu,$index)">
+                                                    <span>{{secondMenu.Text}}</span>
+                                                </a>
+                                            </li>
+                                            <li ng-repeat="secondMenu in firstMenu.Items">
+                                                <a name="{{secondMenu.Text}}"
+                                                   href="{{secondMenu.URL}}"
+                                                   ng-click="siteMapPath(firstMenu,$index)">
+                                                    <span>{{secondMenu.Text}}</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /Top Nav -->
+                </header>
+                <!-- /Top Bar -->
+                <!-- ./header -->
+            </div>
+            <section ng-class="dataSource.menuShow ? 'main_area' : 'main_area main_width'">
+                <form ng-if="dataSource.menuShow" class="page_topmenu">
+                    <!-- Logo -->
+                    <ul class="top_menu">
+                        <li><a href="javascript:void(0)"><span>{{dataSource.memberInfo.UserName | userName}}</span> Hello</a></li>
+                        <li><a href="javascript:void(0)" id="Logout" name="Logout" ng-click="logout()">Logout</a></li>
+                        <li><a href="javascript:void(0)" name="PersonProfile" ng-click="personProfile()">Member Center</a></li>
+                        <select ng-model="dataSource.languageRead" ng-change="changeLanguage()">
+                            <option value="en">{{ 'English' | translate }}</option>
+                            <option value="tw">{{ 'TraditionalChinese' | translate }}</option>
+                            <option value="cn">{{ 'SimplifiedChinese' | translate }}</option>
+                        </select>
+                    </ul>
+                </form>
+                <div ng-if="dataSource.menuShow" class="col-xs-12">
+                    <div class="sidebar-offcanvas" id="sidebar">
+                        <div class="list-group">
+                            <ul>
+                                <li>
+                                    <a ng-class="{'list-group-item active':$index == dataSource.subMenuIndex ,
+                                          'list-group-item':$index != dataSource.subMenuIndex}" href="{{subItem.URL}}"
+                                       ng-click="siteMapPath(dataSource.selectMenu,$index)"
+                                       ng-repeat="subItem in dataSource.selectMenu.Items">
+                                        {{subItem.Text}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/.sidebar-offcanvas-->
+                </div>
+                <div class="col-sm-12">
+                    <div data-ng-view=""></div>
+                </div>
+                <footer id="footer">
+                    <div class="copyright">
+                        <div class="text-center fsize12">
+                            Copyright © 2019 Malaysia Golden Hippo In Tw Inc. All rights reserved
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div><!-- /#wrapper -->
+        <!--訊息框套用-->
+        <!-- Modal -->
+        <button id="ModalShow" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModalLong"
+                style="display: none;"></button>
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            {{dataSource.modalMsg.title}}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12 col-xs-12 col-sm-12">
+                            <div ng-bind-html="dataSource.modalMsg.msg" style="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!--<button type="button" class="btn rectangle-btn" data-dismiss="modal" ng-click="modalMsgConfirmEvent(false)">取消</button>-->
+                        <button name="ModalConfirm" type="button" class="btn rectangle-btn" data-dismiss="modal"
+                                ng-click="modalMsgConfirmEvent(true); $event.stopPropagation();">
+                            Confirm
+                        </button>
+                        <button name="ModalCancel" id="ModalCancel" type="button" class="btn rectangle-btn" data-dismiss="modal"
+                                ng-click="modalMsgConfirmEvent(false); $event.stopPropagation();">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="chageBody" class="row">
+        <div class="col">
+            <span>為確保功能正常，且讓您有最好的使用體驗，請將您的螢幕旋轉為橫向，謝謝！</span>
+        </div>
+    </div>
+
+    <!--BUILD_JS_START-->
+    <script src="./webConfig.js?V=20210708.1"></script>
+    <script src="./js/controller.min.js?V=20210708.1"></script>
+    <script src="./js/directive.min.js?V=20210708.1"></script>
+    <script src="./js/service.min.js?V=20210708.1"></script>
+    <script src="./js/serviceHelper.min.js?V=20210708.1"></script>
+    <script src="./js/repository.min.js?V=20210708.1"></script>
+    <script src="./js/app.min.js?V=20210708.1"></script>
+    <!--BUILD_JS_END-->
+    <!--LOCAL_JS_START-- >
+    <script src="./webConfig.js?V=20200805.1"></script>
+    <script src="./app/app.js?V=20200805.1"></script>
+
+    <script src="./app/Controllers/indexController.js?V=20200805.1"></script>
+    <script src="./app/Controllers/homeController.js?V=20200805.1"></script>
+    <script src="./app/Controllers/loginController.js?V=20200805.1"></script>
+    <script src="./app/Controllers/memberManageController.js?V=20200805.1"></script>
+    <script src="./app/Controllers/subAdminManageController.js?V=20210323.4"></script>
+    <script src="./app/Controllers/NotFindController.js?V=20200805.1"></script>
+    <script src="./app/Controllers/betReportController.js"></script>
+    <script src="./app/Controllers/outstandingReportController.js?V=2021312.1"></script>
+    <script src="./app/Controllers/gameRoomTypeController.js?V=20210827.2"></script>
+    <script src="./app/Controllers/manualOpenLotteryController.js?V=20230311.1"></script>
+
+    <script src="./app/Service/Directive/uploadDirective.js?V=20200805.1"></script>
+    <script src="./app/Service/Directive/paggerDirective.js?V=20200805.1"></script>
+    <script src="./app/Service/Directive/verifyDirective.js?V=20200805.1"></script>
+
+    <script src="./app/Service/authInterceptorService.js?V=20200805.1"></script>
+    <script src="./app/Service/authService.js?V=20200805.1"></script>
+    <script src="./app/Service/memberShipService.js?V=20200805.1"></script>
+    <script src="./app/Service/promotionSettingsService.js?V=20200805.1"></script>
+    <script src="./app/Service/systemConfigService.js?V=20200805.1"></script>
+    <script src="./app/Service/mCompanyService.js?V=20200805.1"></script>
+    <script src="./app/Service/userLevelService.js?V=20200805.1"></script>
+    <script src="./app/Service/lotteryService.js?V=20200805.1"></script>
+    <script src="./app/Service/transactionsService.js?V=20200805.1"></script>
+    <script src="./app/Service/bankService.js?V=20200805.1"></script>
+    <script src="./app/Service/bulletinSettingService.js?V=20200805.1"></script>
+    <script src="./app/Service/bannerSettingService.js?V=20200805.1"></script>
+    <script src="./app/Service/gameRoomService.js?V=20200805.1"></script>
+    <script src="./app/Service/acceptedBankService.js?V=20200805.1"></script>
+    <script src="./app/Service/errorCodeService.js?V=20200805.1"></script>
+    <script src="./app/Service/cbrsService.js?V=20200805.1"></script>
+    <script src="./app/Service/seoService.js?V=20200805.1"></script>
+    <script src="./app/Service/webSiteService.js?V=20200805.1"></script>
+    <script src="./app/Service/depositService.js?V=20200805.1"></script>
+    <script src="./app/Service/withdrawalService.js?V=20200805.1"></script>
+    <script src="./app/Service/mplayerService.js?V=20200805.1"></script>
+    <script src="./app/Service/statementService.js?V=20200805.1"></script>
+    <script src="./app/Service/cBankService.js?V=20200805.1"></script>
+    <script src="./app/Service/bankGroupService.js?V=20200805.1"></script>
+    <script src="./app/Service/languageService.js?V=20200805.1"></script>
+    <script src="./app/Service/apiDefaultService.js"></script>
+    <script src="./app/Service/functionGroupService.js"></script>
+    <script src="./app/Service/mGroupService.js"></script>
+    <script src="./app/Service/gameDealerCompanyService.js"></script>
+    <script src="./app/Service/thirdPartyService.js"></script>
+    <script src="./app/Service/platformService.js?V=20200805.1"></script>
+    <script src="./app/Service/betLimitSettingService.js?V=20210827.1"></script>
+
+    <script src="./app/Service/helper/datetimeHelper.js?V=20200805.1"></script>
+    <script src="./app/Service/helper/echartHelper.js?V=20200805.1"></script>
+    <script src="./app/Service/helper/reportHelper.js?V=20210218.1"></script>
+    <script src="./app/Service/validators/memberManageValidator.js?V=20200805.1"></script>
+
+    <script src="./app/Repositorys/Helper/RepositoryHelper.js?V=20200805.1"></script>
+    <script src="./app/Repositorys/MemberShipRepository.js?V=20200805.1"></script>
+    < !--LOCAL_JS_END-->
+
+</body>
+</html>

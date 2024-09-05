@@ -1,0 +1,136 @@
+$GrassGreenStyle__theme:#1e7027;
+$GrassGreenStyle__Deep:#0b4217;
+$GrassGreenStyle__light:#6dd400;
+$GrassGreenStyle__light2:#87eb1d;
+$GrassGreenStyle__light3:#a5e75f;
+$GrassGreenStyle__point:#fedc3d;
+
+
+.GrassGreenStyle{
+    a{
+        color:$GrassGreenStyle__theme;
+    }
+    .login-sidebar{
+        .login-box{
+            .card-body{
+                background-color: #0b4217af;
+                background-image: none;
+            }
+        }
+    }
+    .rectangle-btn{
+        @include button-bg (transparent,$black,$GrassGreenStyle__theme,$white);
+    }
+    .btn-primary{
+        @include button-bg ($GrassGreenStyle__theme,$white,$GrassGreenStyle__Deep,$white);
+    }
+    .btn-info{
+        @include button-bg ($GrassGreenStyle__light, $white ,$GrassGreenStyle__point, $black);
+    }
+    .header{
+        background-image: none;
+        background-color:$GrassGreenStyle__theme;
+    }
+    .page_topmenu {
+        .top_menu{
+            background-color:$GrassGreenStyle__theme;
+            li{
+                border-right:1px solid $GrassGreenStyle__light3;
+                span{
+                   color:$GrassGreenStyle__point;
+                }
+                a{
+                    color:$white;
+                }
+            }
+        }
+    }
+    
+    .nav {
+        > li{
+            > a{
+                &:active,
+                &:focus,
+                &:hover{
+                    background-color:$GrassGreenStyle__theme;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        > li {
+            &.first{
+                &:hover{
+                    > a{
+                        color:$black;
+                        background-color:$GrassGreenStyle__light3!important;
+                        border-bottom: 2px solid $GrassGreenStyle__light;
+                    }
+                }
+            }
+            > a {
+                border-bottom: 2px solid $GrassGreenStyle__light!important;
+                &.collapse-item{
+                   color:$black;
+                   background-color:$GrassGreenStyle__light3;
+                }
+            }
+        } 
+    }
+    .nav_btn{
+        background-color:$GrassGreenStyle__light;
+    }
+    .nav-pills {
+      > li{
+          &.active{
+              >a{
+                  background-color:$GrassGreenStyle__point;
+                  color:$black;
+                  &:active,
+                  &:hover,
+                  &:focus{
+                      background-color:$GrassGreenStyle__point;
+                      color:$black;
+                  }
+              }
+          }
+      }
+    }
+    .collapse{
+        .card-body{
+            background-color:$GrassGreenStyle__Deep!important;
+            li{
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color:$GrassGreenStyle__light2!important;
+                    a{
+                        color:$black;
+                    }
+                }
+            }
+        }
+    }
+    .modal-content{
+        border-top:10px solid $GrassGreenStyle__theme;
+    }
+    .panel-default { 
+        > .panel-heading{
+            background-color:$GrassGreenStyle__theme;
+        }
+    }
+    table{
+        th{
+            background-color:$GrassGreenStyle__theme;
+        }
+    }
+    .list-group-item{
+        &.active{
+            background-color:$GrassGreenStyle__Deep;
+            &:hover,
+            &:focus{
+                background-color:$GrassGreenStyle__theme;
+            }
+        }
+    }
+}

@@ -1,0 +1,495 @@
+/* scss default */
+
+
+
+$font_style:'Montserrat', 'Noto Sans TC', 'Microsoft JhengHei', Arial, Helvetica, sans-serif;
+$w-full:100%;
+
+// color
+$transparent:rgba(0, 0, 0, 0);
+$navy:#001F3F;
+$blue :#54abfe;
+$aqua:#7FDBFF;
+$teal :#39CCCC;
+$olive:#3D9970;
+$green:#06d79c;
+$lime :#01FF70;
+$yellow :#f7b500;
+$light_yellow:#fdd835;
+$yellow_transparent:rgba(255, 227, 51, 0.7);
+$deep_yellow :#f6c60e;
+$deep_orange :#c24e12;
+$orange :#FF851B;
+$red:#ef5350;
+$fuchsia :#F012BE;
+$purple:#7258f2;
+$light_purple: #5264a1;
+$deep_purple:  #3b2f9f;
+$maroon :#85144B;
+$white:#fff;
+$silver:#ddd;
+$deep_gray : #6f6f6f;
+$gray:#cfcfcf;
+$white:#fff;
+$black:#3f3f3f;
+$light:#efefef;
+$yellow:#f7b500;
+$theme-color:#1787ad;
+
+
+@mixin rwdw($max){
+  @media only screen and (max-width: $max + px ){
+    @content;
+  }
+}
+
+@mixin w-full {
+  float: left;
+  width: 100%;
+}
+
+@mixin transition {
+  transition: all .3s ease-in-out
+}
+
+@mixin gradient1 ($color1, $color2) {
+  background-image: linear-gradient(to top, $color1 0%, $color2 100%);
+}
+
+@mixin gradient2 {
+  background-image: linear-gradient(135deg, #0ccbef 0%, #091f59 48%);
+}
+
+//   size
+
+$baseSize: 1em;
+@function font($level: 1) {
+  @return $baseSize *$level;
+}
+
+@mixin gradient_box ( $color1, $color2, $color3) {
+  // background-image: linear-gradient(135deg, rgba(0, 31, 63, 0.8) 0%, rgba(92, 50, 175, 0.8) 48%);
+  background-image: linear-gradient(135deg, $color1 0%, $color1 48%);
+  float: left;
+  width: 100%;
+
+}
+
+@mixin info_box {
+  // background-image: linear-gradient(135deg, rgba(0, 31, 63, 0.8) 0%, rgba(92, 50, 175, 0.8) 48%);
+  background-image: linear-gradient(135deg, rgb(12, 203, 239) 0%, rgb(9, 31, 89) 48%);
+  width: 100%;
+  min-height: auto;
+  border-bottom: 2px solid #1b315f;
+  padding: 12px;
+  float: left;
+
+}
+@mixin input_style {
+  border-radius: 7px;
+  box-shadow: inset 2px 2px 4px 1px rgba(0, 0, 0, 0.68);
+  border: solid 1px #3d3d3d;
+  background-color: #232323;
+  text-align: center;
+  padding:10px 0;
+//  font-size:font(1.5);
+  
+}
+@mixin info_topic {
+  // width: 50%;
+  // height: 45px;
+  border-radius: 8px 0 0 0;
+  display: block;
+  // position: absolute;
+  position: relative;
+  // top:2px;
+  // margin-top: -8px;
+  background-image: linear-gradient(135deg, rgb(12, 203, 239) 0%, rgb(9, 31, 89) 100%);
+  // background-image: linear-gradient(135deg, rgba(0, 31, 63, 0.8) 0%, rgba(92, 50, 175, 0.8) 100%);
+  border-left: 2px solid #0cc1e6;
+  border-top: 2px solid #0a79a7;
+  clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+  -webkit-clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+  &:before {
+    content: "";
+   
+  }
+
+  span {
+    position: relative;
+    line-height: 1.8;
+    padding: 5px 15px;
+    color: #fff;
+    font-size: font(1.5);
+    font-weight: bold;
+    // top: -5px;
+    text-align: left;
+    width:100%;
+    text-transform: capitalize;
+    text-shadow: 2px 2px 3px #6b85e1;
+    font-family: 'Montserrat', 'Noto Sans TC', 'Microsoft JhengHei', Arial, Helvetica, sans-serif;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+}
+
+@mixin  checkbox {
+  input[type="checkbox"] {
+    display:none;
+    }
+    
+    input[type="checkbox"] + label {
+        color:#f2f2f2;
+    }
+    
+    input[type="checkbox"] + label span {
+        display:inline-block;
+        width:19px;
+        height:19px;
+        margin:-2px 5px 0 0;
+        vertical-align:middle;
+        background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) left top no-repeat;
+        cursor:pointer;
+    }
+    
+    input[type="checkbox"]:checked + label span {
+        background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -19px top no-repeat;
+    }
+}
+
+@mixin  filter-gradient {
+  background: linear-gradient(to bottom,  rgba(9,132,233,1) 0%,rgba(4,39,163,1) 82%,rgba(4,39,163,1) 100%);
+}
+@mixin text_shadow ($text_color,$text_bg){
+  color:$text-color;
+  text-shadow: 5px 3px 5px $text_bg;
+  font-family: $font_style;
+}
+
+
+$btn-config:(
+	delete:(
+		class: 'delete',
+    color: $white,
+		bg: $red,
+
+  ),
+  orange:(
+		class: 'orange',
+    color: $white,
+		bg: $orange,
+
+  ),
+  red:(
+		class: 'red',
+    color: $white,
+		bg: $orange,
+
+  ),
+  green:(
+		class: 'green',
+    color: $white,
+		bg: $green,
+
+  ),
+  purple:(
+		class: 'purple',
+    color: $white,
+		bg: $purple,
+
+  ),
+  aqua:(
+		class: 'aqua',
+    color: $white,
+		bg: $aqua,
+
+  ),
+  gray:(
+		class: 'gray',
+    color: $white,
+		bg: $gray,
+
+  ),
+  white:(
+		class: 'white',
+    color: $black,
+		bg: $white,
+
+  ),
+ 
+);
+
+@mixin button-variant($color, $bg) {
+  color: $color;
+  background-color: $bg;
+  opacity: 0.8;
+  @include transition;
+    &:hover,
+    &:focus,
+    &:active,
+    &.active{
+      // border:1px solid $bg;
+      // background-color: $color;
+      background-color: $bg;
+      transition: all 0.3s ease;
+      color:$color;
+      opacity: 1;
+    }
+   
+}
+
+%btn {
+  // 結構
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  text-transform: capitalize;
+  background-image: none;
+  // border: 1px solid transparent;
+  border-radius: 4px;
+ 
+  &:hover, &:focus {
+    color: #333;
+    background-color: #e6e6e6;
+  }
+ 
+}
+@each $name, $value in $btn-config {
+  $class: map-get($value, class);
+  $color: map-get($value, color);
+  $bg: map-get($value, bg);
+  // $border-color: map-get($value, border-color);
+
+  .#{$class}_btn{
+    @extend %btn;
+    @include button-variant($color, $bg);
+    @include rwdw(991){
+      padding:5px 5px!important;
+    }
+  }
+}
+
+
+@mixin button-bg($bg, $text , $bg_2 , $text_2) {
+  background: $bg;
+  color: $text;
+  opacity: 0.8;
+  &:active, 
+  &:focus, 
+  &:hover {
+    background-color: $bg_2;
+    transition: all 0.3s ease;
+    color: $text_2;
+    opacity: 1;
+  }
+
+  
+  i {
+    margin-right: 5px;
+  }
+}
+
+
+
+
+@mixin line-button( $text, $border-color, $bg , $text_2) {
+  background:transparent;
+  color: $text;
+  border-radius: 20px;
+  padding:3px 8px;
+  border:1px solid $border-color;
+  text-shadow: 0px;
+  a{
+    color:$text;
+  }
+  &:focus,
+  &:active,
+  &:hover {
+    background-color: $bg!important;
+    transition: all 0.3s ease;
+    color: $text_2;
+    a{
+      color:$text_2;
+    }
+  }
+  i {
+    margin-right: 5px;
+  }
+}
+
+
+
+@mixin opening_box($border-color2){
+  border:1px solid $border-color2;
+  box-shadow: 6px 8px 22px $border-color2;
+  animation: shining_line;
+  animation-duration:1s;
+  animation-iteration-count: infinite;
+
+  @keyframes shining_line{
+    from{
+      // border:1px solid transparent;
+    }
+    to{
+      // border:2px solid $border-color2;
+    }
+  }
+  // transition:
+}
+
+
+
+$max:50;
+$offset:5;
+$unit: 'px'; // Feel free to change the unit.
+@mixin list-loop($className, $styleName) {
+  $i: 0;
+  @while $i <= $max {
+    #{$className + $i} { 
+      #{$styleName}: #{$i + $unit};
+    }
+    $i: $i + $offset;
+  }
+}
+@include list-loop('.mt-', 'margin-top');
+@include list-loop('.mr-', 'margin-right');
+@include list-loop('.mb-', 'margin-bottom');
+@include list-loop('.ml-', 'margin-left');
+@include list-loop('.mx-', 'margin');
+// Paddings
+@include list-loop('.pt-', 'padding-top');
+@include list-loop('.pr-', 'padding-right');
+@include list-loop('.pb-', 'padding-bottom');
+@include list-loop('.pl-', 'padding-left');
+@include list-loop('.px-', 'padding');
+
+@mixin icon_style ($icon_color, $shadow_color) {
+  color: $icon_color;
+  text-shadow: $shadow_color 4px 3px 0px;
+  
+}
+
+
+
+@mixin respond-to($minWidth:false, $maxWidth:false) {
+  @if $maxWidth==false or $maxWidth=="" {
+    @media only screen and (min-width: $minWidth + px) {
+      @content;
+    }
+  }
+
+  @else if $minWidth==false or $minWidth=="" {
+    @media only screen and (max-width: $maxWidth + px) {
+      @content;
+    }
+  }
+
+  @else {
+    @media only screen and (min-width: $minWidth + px) and (max-width: $maxWidth + px) {
+      @content;
+    }
+  }
+}
+
+
+
+
+
+$text-config:(
+	red:(
+		class: 'red',
+    color: $red,
+  ),
+  orange:(
+		class: 'orange',
+    color: $orange,
+  ),
+  green:(
+		class: 'green',
+    color: $green,
+  ),
+  purple:(
+		class: 'purple',
+    color: $purple,
+  ),
+  aqua:(
+		class: 'aqua',
+    color: $aqua,
+  ),
+  blue:(
+		class: 'blue',
+    color: $blue,
+  ),
+  gray:(
+		class: 'gray',
+    color: $gray,
+  ),
+  deepgray:(
+		class: 'deepgray',
+    color: #434343,
+  ),
+  white:(
+		class: 'white',
+    color: $white,
+  ),
+  yellow:(
+		class: 'yellow',
+    color: $yellow,
+  ),
+  lime:(
+		class: 'lime',
+    color: $lime,
+  ),
+  teal:(
+		class: 'teal',
+    color: $teal,
+  ),
+  theme:(
+		class: 'theme',
+    color: $theme-color,
+  ),
+ 
+);
+@mixin text ($color){
+  color:$color;
+ }
+
+ @each $name, $value in $text-config {
+  $class: map-get($value, class);
+  $color: map-get($value, color);
+  // $bg: map-get($value, bg);
+  // $border-color: map-get($value, border-color);
+
+  .text-#{$class}{
+   
+    @include text($color);
+  }
+}
+
+
+@mixin select ($color){
+
+    background-color: transparent;
+    border: 1px solid $color;
+    padding: 0px 10px;
+  
+}
+
+
+
+
+
+
+  
+
+
+
+
+

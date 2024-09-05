@@ -1,0 +1,133 @@
+$PurpleStyle__theme:#473568;
+$PurpleStyle__Deep:#181733;
+$PurpleStyle__light:#782143;
+$PurpleStyle__light2:#a12e5a;
+$PurpleStyle__light3:#e04d86;
+$PurpleStyle__point:#b620e0;
+
+
+.PurpleStyle{
+    a{
+        color:$PurpleStyle__theme;
+    }
+    .login-sidebar{
+        .login-box{
+            .card-body{
+                background-color: #2c704aaf;
+                background-image: none;
+            }
+        }
+    }
+    .rectangle-btn{
+        @include button-bg (transparent,$black,$PurpleStyle__theme,$white);
+    }
+    .btn-primary{
+        @include button-bg ($PurpleStyle__theme,$white,$PurpleStyle__Deep,$white);
+    }
+    .btn-info{
+        @include button-bg ($PurpleStyle__light, $white ,$PurpleStyle__point, $white);
+    }
+    .header{
+        background-image: none;
+        background-color:$PurpleStyle__theme;
+    }
+    .page_topmenu {
+        .top_menu{
+            background-color:$PurpleStyle__theme;
+            li{
+                border-right:1px solid $PurpleStyle__light3;
+                span{
+                   color:$PurpleStyle__light3;
+                }
+                a{
+                    color:$white;
+                }
+            }
+        }
+    }
+    
+    .nav {
+        > li{
+            > a{
+                &:active,
+                &:focus,
+                &:hover{
+                    background-color:$PurpleStyle__theme;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        > li {
+            &.first{
+                &:hover{
+                    > a{
+                        color:$white;
+                        background-color:$PurpleStyle__light3!important;
+                        border-bottom: 2px solid $PurpleStyle__light;
+                    }
+                }
+            }
+            > a {
+                border-bottom: 2px solid $PurpleStyle__light!important;
+                &.collapse-item{
+                   color:$white;
+                   background-color:$PurpleStyle__light3;
+                }
+            }
+        } 
+    }
+    .nav_btn{
+        background-color:$PurpleStyle__light;
+    }
+    .nav-pills {
+      > li{
+          &.active{
+              >a{
+                  background-color:$PurpleStyle__point;
+                  color:$black;
+                  &:active,
+                  &:hover,
+                  &:focus{
+                      background-color:$PurpleStyle__point;
+                      color:$black;
+                  }
+              }
+          }
+      }
+    }
+    .collapse{
+        .card-body{
+            background-color:$PurpleStyle__Deep!important;
+            li{
+                &.active,
+                &:hover,
+                &:focus{
+                    background-color:$PurpleStyle__light2!important;
+                }
+            }
+        }
+    }
+    .modal-content{
+        border-top:10px solid $PurpleStyle__theme;
+    }
+    .panel-default { 
+        > .panel-heading{
+            background-color:$PurpleStyle__theme;
+        }
+    }
+    table{
+        th{
+            background-color:$PurpleStyle__theme;
+        }
+    }
+    .list-group-item{
+        &.active{
+            background-color:$PurpleStyle__Deep;
+            &:hover,
+            &:focus{
+                background-color:$PurpleStyle__theme;
+            }
+        }
+    }
+}
